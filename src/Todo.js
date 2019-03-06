@@ -11,8 +11,8 @@ class Todo extends React.Component {
     text: "",
     itemsLeft: 0,
     footer: false,
-    btns:["all", "active", "completed", "clear"],
-    activeBtn: "all",
+    btns: ["all", "active", "completed", "clear"],
+    activeBtn: "all"
   };
 
   handleChange = event => {
@@ -22,83 +22,81 @@ class Todo extends React.Component {
   };
 
   addNewItem = event => {
-    
     const todos = [...this.state.todos];
     const { id, text } = this.state;
-      if (!text) {
-        event.preventDefault();
-        return;
-      }
+    if (!text) {
+      event.preventDefault();
+      return;
+    }
 
-      this.setState(prevState => {
-        event.preventDefault();
-        return {
-          id: prevState.id + 1,
-          todos: [...todos, { id: id, text: text, done: false }],
-          text: "",
-          itemsLeft: prevState.itemsLeft + 1,
-          footer: true,
-        };
-      });
-      event.persist();
+    this.setState(prevState => {
+      event.preventDefault();
+      return {
+        id: prevState.id + 1,
+        todos: [...todos, { id: id, text: text, done: false }],
+        text: "",
+        itemsLeft: prevState.itemsLeft + 1,
+        footer: true
+      };
+    });
+    event.persist();
   };
 
   removeItem = id => {
-    const todos = [...this.state.todos]
-      .filter(todo => todo.id !== id);
+    const todos = [...this.state.todos].filter(todo => todo.id !== id);
 
     this.setState(() => {
       return {
         todos: todos,
-        itemsLeft: todos.filter(todo => !todo.done).length,
+        itemsLeft: todos.filter(todo => !todo.done).length
       };
     });
   };
 
   setItemStatus = id => {
     const todos = [...this.state.todos].map(todo => {
-      if (todo.id === id) {
+      if (id === todo.id) {
         return {
           ...todo,
-          done: !this.state.todos[id].done
+          done: !todo.done
         };
       }
       return todo;
     });
-    
+
     this.setState(() => {
       return {
         todos: todos,
-        itemsLeft: todos.filter(el => !el.done).length,
+        itemsLeft: todos.filter(el => !el.done).length
       };
     });
   };
 
-  showAll = (arr) => {
+  showAll = arr => {
     return arr;
   };
 
-  showActive = (arr) => {
+  showActive = arr => {
     return arr.filter(el => !el.done);
   };
 
-  showCompleted = (arr) => {
+  showCompleted = arr => {
     return arr.filter(el => el.done);
   };
 
-  handleBtn = (btn) => {
+  handleBtn = btn => {
     const todos = [...this.state.todos];
     this.setState({
-      activeBtn:btn,
-      todos: btn==="clear" ? todos.filter(el => !el.done) : todos, 
+      activeBtn: btn,
+      todos: btn === "clear" ? todos.filter(el => !el.done) : todos
     });
-  }
+  };
 
-  filter = (activeBtn) => {
+  filter = activeBtn => {
     const todos = [...this.state.todos];
 
     if (activeBtn === "all") {
-      return this.showAll(todos); 
+      return this.showAll(todos);
     } else if (activeBtn === "active") {
       return this.showActive(todos);
     } else if (activeBtn === "completed") {
@@ -106,26 +104,24 @@ class Todo extends React.Component {
     } else {
       return todos;
     }
-  }
+  };
 
   render() {
     const { placeholder } = this.props;
-    const { itemsLeft } = this.state;
-    const { footer } = this.state;
-    const { btns, activeBtn } = this.state;
+    const { itemsLeft, footer, btns, activeBtn } = this.state;
 
     const items = this.filter(activeBtn);
 
     return (
       <div className="Todo">
-      <form onSubmit={event => this.addNewItem(event)}>
-        <input
-          className="Input-field"
-          placeholder={placeholder}
-          value={this.state.text}
-          onChange={event => this.handleChange(event)}
-        />
-      </form>
+        <form onSubmit={event => this.addNewItem(event)}>
+          <input
+            className="Input-field"
+            placeholder={placeholder}
+            value={this.state.text}
+            onChange={event => this.handleChange(event)}
+          />
+        </form>
         <ul className="Todo_list">
           {items.map(todo => (
             <TodoItem
