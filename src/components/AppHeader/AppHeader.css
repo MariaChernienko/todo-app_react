@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300");
+.app-header {
+  align-items: baseline;
+}
+
+.app-header h1 {
+  flex-grow: 1;
+  font-size: 6rem;
+  color: #999;
+  font-family: "Open Sans Condensed", sans-serif;
+}
+
+.app-header h2 {
+  font-size: 1.2rem;
+  color: grey;
+}

@@ -1,0 +1,6 @@
+.search-input {
+  width: auto;
+  flex-grow: 1;
+  margin-right: 3px;
+  box-shadow: 4px 7px 13px -6px rgba(0,0,0,0.75);
+}

@@ -1,0 +1,8 @@
+.todo-list {
+  border-radius: .25rem;
+  box-shadow: 4px 7px 13px -6px rgba(0,0,0,0.75);
+}
+
+.todo-list .list-group-item {
+  padding: .25rem .75rem;
+}
